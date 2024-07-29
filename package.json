@@ -12,6 +12,6 @@
   ],
   "dependencies": {
     "express": "^4.16.4",
-    "winston": "^3.13.1",
+    "winston": "^3.13.1"
   }
 }
