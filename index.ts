@@ -18,7 +18,7 @@ router.get("/status", (req: Request, res: Response) => {
 });
 
 app.post("/payments", (req: Request, res: Response) => {
-  logger.info("payment received: ", req.body);
+  logger.info(req.body);
   const { carId, amount } = req.body;
   if (typeof amount !== "number" || !Number.isInteger(amount)) {
     logger.info("Invalid amount. It must be an integer.");
