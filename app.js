@@ -3,7 +3,6 @@ const logger = require('./logger');
 const app = express();
 const router = express.Router();
 
-const path = __dirname + "/views/";
 const port = 8080;
 app.use(express.json())
 router.use(function (req, res, next) {
