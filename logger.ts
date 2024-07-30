@@ -5,7 +5,7 @@ const { combine, timestamp, label, printf, colorize, json, prettyPrint } =
 
 const logger = winston.createLogger({
   level: "info", // Set the default log level
-  format: combine(winston.format.json(), winston.format.colorize()),
+  format: winston.format.json(),
   transports: [
     // Log to the console
     new winston.transports.Console({
