@@ -18,10 +18,14 @@ router.get("/status", (req: Request, res: Response) => {
 });
 
 app.post("/payments", (req: Request, res: Response) => {
-  logger.info(req.body);
+  logger.info({message:"info", req.body});
+  logger.warn({message: "warning ", req.body});
+  logger.log({message: "log ", req.body});
+  logger.silly({message: "silly", req.body})
+
   const { carId, amount } = req.body;
   if (typeof amount !== "number" || !Number.isInteger(amount)) {
-    logger.info("Invalid amount. It must be an integer.");
+    logger.error("Invalid amount. It must be an integer.");
     return res
       .status(400)
       .json({ error: "Invalid amount. It must be an integer." });
