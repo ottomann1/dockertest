@@ -8,7 +8,7 @@ const port = 8080;
 app.use(express.json());
 
 router.use((req: Request, res: Response, next: NextFunction) => {
-  logger.log("/" + req.method);
+  logger.log({ level: "log", message: "/" + req.method });
   next();
 });
 
@@ -18,19 +18,23 @@ router.get("/status", (req: Request, res: Response) => {
 });
 
 app.post("/payments", (req: Request, res: Response) => {
-  logger.info(req.body);
   const { carId, amount } = req.body;
-  logger.info({ message: "info", carId, amount });
-  logger.warn({ message: "warning ", carId, amount });
-  logger.log({ message: "log ", carId, amount });
-  logger.silly({ message: "silly", carId, amount });
+  logger.info({ level: "info", message: "info", carId, amount });
+  logger.warn({ level: "warn", message: "warning ", carId, amount });
+  logger.log({ level: "log", message: "log ", carId, amount });
+  logger.silly({ level: "silly", message: "silly", carId, amount });
   if (typeof amount !== "number" || !Number.isInteger(amount)) {
     logger.error("Invalid amount. It must be an integer.");
     return res
       .status(400)
       .json({ error: "Invalid amount. It must be an integer." });
   }
-  logger.info({ message: "Payment processed successfully", carId, amount });
+  logger.info({
+    level: "info",
+    message: "Payment processed successfully",
+    carId,
+    amount,
+  });
   res
     .status(201)
     .json({ message: "Payment processed successfully", carId, amount });
@@ -39,5 +43,8 @@ app.post("/payments", (req: Request, res: Response) => {
 app.use("/", router);
 
 app.listen(port, () => {
-  logger.info("Example app listening on port 8080!");
+  logger.info({
+    message: "Example app listening on port 8080!",
+    level: "info",
+  });
 });
