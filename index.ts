@@ -8,7 +8,7 @@ const port = 8080;
 app.use(express.json());
 
 router.use((req: Request, res: Response, next: NextFunction) => {
-  logger.log({ level: "log", message: "/" + req.method });
+  logger.log({ message: "/" + req.method });
   next();
 });
 
@@ -19,9 +19,9 @@ router.get("/status", (req: Request, res: Response) => {
 
 app.post("/payments", (req: Request, res: Response) => {
   const { carId, amount } = req.body;
-  logger.info({ level: "info", message: "info", carId, amount });
-  logger.warn({ level: "warn", message: "warning ", carId, amount });
-  logger.log({ level: "info", message: "log ", carId, amount });
+  logger.info({ message: "info", carId, amount });
+  logger.warn({ message: "warning ", carId, amount });
+  logger.log({ message: "log ", carId, amount });
   if (typeof amount !== "number" || !Number.isInteger(amount)) {
     logger.error("Invalid amount. It must be an integer.");
     return res
@@ -44,6 +44,5 @@ app.use("/", router);
 app.listen(port, () => {
   logger.info({
     message: "Example app listening on port 8080!",
-    level: "info",
   });
 });
