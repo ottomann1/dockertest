@@ -22,7 +22,10 @@ app.post("/payments", (req: Request, res: Response) => {
   logger.info({ message: "info", carId, amount });
   logger.warn({ message: "warning ", carId, amount });
   if (typeof amount !== "number" || !Number.isInteger(amount)) {
-    logger.error("Invalid amount. It must be an integer.");
+    logger.log({
+      message: "Invalid amount. It must be an integer.",
+      level: "error",
+    });
     return res
       .status(400)
       .json({ error: "Invalid amount. It must be an integer." });
