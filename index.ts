@@ -8,7 +8,7 @@ const port = 8080;
 app.use(express.json());
 
 router.use((req: Request, res: Response, next: NextFunction) => {
-  logger.log({ message: "/" + req.method });
+  logger.info({ message: "/" + req.method });
   next();
 });
 
@@ -21,7 +21,6 @@ app.post("/payments", (req: Request, res: Response) => {
   const { carId, amount } = req.body;
   logger.info({ message: "info", carId, amount });
   logger.warn({ message: "warning ", carId, amount });
-  logger.log({ message: "log ", carId, amount });
   if (typeof amount !== "number" || !Number.isInteger(amount)) {
     logger.error("Invalid amount. It must be an integer.");
     return res
