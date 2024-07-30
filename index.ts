@@ -18,10 +18,10 @@ router.get("/status", (req: Request, res: Response) => {
 });
 
 app.post("/payments", (req: Request, res: Response) => {
-  logger.info({message:"info", req.body});
-  logger.warn({message: "warning ", req.body});
-  logger.log({message: "log ", req.body});
-  logger.silly({message: "silly", req.body})
+  logger.info({ message: "info", req });
+  logger.warn({ message: "warning ", req });
+  logger.log({ message: "log ", req });
+  logger.silly({ message: "silly", req });
 
   const { carId, amount } = req.body;
   if (typeof amount !== "number" || !Number.isInteger(amount)) {
