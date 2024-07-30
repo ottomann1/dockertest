@@ -21,8 +21,7 @@ app.post("/payments", (req: Request, res: Response) => {
   const { carId, amount } = req.body;
   logger.info({ level: "info", message: "info", carId, amount });
   logger.warn({ level: "warn", message: "warning ", carId, amount });
-  logger.log({ level: "log", message: "log ", carId, amount });
-  logger.silly({ level: "silly", message: "silly", carId, amount });
+  logger.log({ level: "info", message: "log ", carId, amount });
   if (typeof amount !== "number" || !Number.isInteger(amount)) {
     logger.error("Invalid amount. It must be an integer.");
     return res
